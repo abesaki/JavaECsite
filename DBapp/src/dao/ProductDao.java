@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entity.Product;
+import entity.ProductSetting;
 
 public class ProductDao {
 
@@ -143,21 +144,31 @@ public class ProductDao {
 	}
 
 	//自動在庫追加設定取得メソッド.
-	public int autoAddStockCountGet(String name) throws Exception {
+	public List<ProductSetting> productSettingGet() throws Exception {
+
+		//戻り値用リスト.
+		List<ProductSetting> productSettingList = new ArrayList<ProductSetting>();
 
 		// 在庫数検索.
-		ps = con.prepareStatement("SELECT autoAddStockCount FROM product_setting WHERE name = ?");
-		ps.setString(1, name);
+		ps = con.prepareStatement("SELECT * FROM product_setting");
 
-		// SELECT結果取得.
+		// 検索結果取得.
 		rs = ps.executeQuery();
-
-		// 結果格納.
-		int autoAddStockCount = 0;
 
 		while (rs.next()) {
 
-			autoAddStockCount = rs.getInt("autoAddStockCount");
+			// インスタンス生成.
+			Product product = new Product();
+
+			// カラムを取得して各setterへ送る.
+			product.setNo(rs.getInt("no"));
+			product.setName(rs.getString("name"));
+			product.setPrice(rs.getInt("price"));
+			product.setCount(rs.getInt("count"));
+			product.setTimeStamp(rs.getTimestamp("TimeStamp"));
+
+			// リストに格納.
+			productList.add(product);
 
 		}
 
