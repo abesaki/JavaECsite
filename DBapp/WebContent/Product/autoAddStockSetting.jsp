@@ -2,11 +2,13 @@
 <%@ page import="java.util.*,java.text.*,dao.*,entity.*"%>
 
 <%
-	//商品一覧メソッド呼び出し(プルダウン用).
+
+	//自動発注設定取得メソッド呼び出し.
 	ProductDao dao = new ProductDao();
-	List<Product> productList = dao.searchProductAll();
+	List<Product> productSettingList = dao.productSettingGet();
 
 	//日時用フォーマット.
+
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 	//数字用フォーマット.
@@ -19,25 +21,30 @@
 
 	<head>
 		<title>自動発注設定画面</title>
+		<style>
+			table{margin-top: 20px; border-collapse: collapse;}
+			table td{border: 1px solid; border-collapse: collapse; padding: 10px;}
+		</style>
 	</head>
 
 	<body>
 
 		自動で発注する数を入力してください。<br>
-		<br><table>
-			<tr  align="center"><td>ID</td><td>商品名</td><td>設定数</td><td>個数</td><td>更新日時</td></tr>
+		<table>
+			<tr  align="center"><td>ID</td><td>商品名</td><td>在庫数</td><td>下限数</td><td>発注数</td><td>更新日時</td></tr>
 
-<% 			for(int i = 0 ; i < productList.size(); i++){%>
+<% 		for(int i = 0 ; i < productSettingList.size(); i++){%>
 
 				<tr>
 					<td align="right"><%=i+1%></td>
-					<td align="center"><%=productList.get(i).getName()%></td>
-					<td align="right"><%=commaFormat.format(productList.get(i).getPrice())%>円</td>
-					<td align="right"><%=commaFormat.format(productList.get(i).getCount())%></td>
-					<td align="right"><%=sdf.format(productList.get(i).getTimeStamp())%></td>
+					<td align="center"><%=productSettingList.get(i).getName()%></td>
+					<td align="right"><%=commaFormat.format(productSettingList.get(i).getCount())%>個</td>
+					<td align="right"><%=commaFormat.format(productSettingList.get(i).getCountLowerLimit())%>個</td>
+					<td align="right"><%=commaFormat.format(productSettingList.get(i).getAutoAddStockCount())%>個</td>
+					<td align="right"><%=sdf.format(productSettingList.get(i).getTimeStampProductSetting())%></td>
 				</tr>
 
-<%			} %>
+<% 		} %>
 
 		</table>
 

@@ -62,6 +62,7 @@ public class LoginServlet extends HttpServlet {
 
 				} else {
 
+					//セッションにIDを格納.
 					session.setAttribute("userId", userId);
 
 					// 管理者か検証.

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entity.Product;
-import entity.ProductSetting;
 
 public class ProductDao {
 
@@ -132,7 +131,7 @@ public class ProductDao {
 			product.setName(rs.getString("name"));
 			product.setPrice(rs.getInt("price"));
 			product.setCount(rs.getInt("count"));
-			product.setTimeStamp(rs.getTimestamp("TimeStamp"));
+			product.setTimeStampProduct(rs.getTimestamp("TimeStamp"));
 
 			// リストに格納.
 			productList.add(product);
@@ -143,14 +142,15 @@ public class ProductDao {
 
 	}
 
-	//自動在庫追加設定取得メソッド.
-	public List<ProductSetting> productSettingGet() throws Exception {
+	// 自動在庫追加設定取得メソッド.
+	public List<Product> productSettingGet() throws Exception {
 
-		//戻り値用リスト.
-		List<ProductSetting> productSettingList = new ArrayList<ProductSetting>();
+		// 戻り値用リスト.
+		List<Product> productSettingList = new ArrayList<Product>();
 
 		// 在庫数検索.
-		ps = con.prepareStatement("SELECT * FROM product_setting");
+		ps = con.prepareStatement("\r\n" +
+				"SELECT *, product.timestamp AS 'timeStampProduct', product_setting.timestamp AS 'timeStampProductSetting'  FROM product_setting JOIN product ON name = productName;");
 
 		// 検索結果取得.
 		rs = ps.executeQuery();
@@ -160,19 +160,22 @@ public class ProductDao {
 			// インスタンス生成.
 			Product product = new Product();
 
-			// カラムを取得して各setterへ送る.
 			product.setNo(rs.getInt("no"));
 			product.setName(rs.getString("name"));
 			product.setPrice(rs.getInt("price"));
 			product.setCount(rs.getInt("count"));
-			product.setTimeStamp(rs.getTimestamp("TimeStamp"));
+			product.setTimeStampProduct(rs.getTimestamp("timeStampProduct"));
+			product.setId(rs.getInt("id"));
+			product.setProductName(rs.getString("productName"));
+			product.setAutoAddStockCount(rs.getInt("autoAddStockCount"));
+			product.setCountLowerLimit(rs.getInt("countLowerLimit"));
+			product.setTimeStampProductSetting(rs.getTimestamp("timeStampProductSetting"));
 
-			// リストに格納.
-			productList.add(product);
+			productSettingList.add(product);
 
 		}
 
-		return autoAddStockCount;
+		return productSettingList;
 
 	}
 

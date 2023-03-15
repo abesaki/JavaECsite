@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,7 +47,7 @@ public class UsersDao {
 		try {
 
 			// SQL文送信.
-			ps = con.prepareStatement("SELECT * FROM user WHERE userid = ? AND password = ?");
+			ps = con.prepareStatement("SELECT * FROM users WHERE userid = ? AND password = ?");
 
 			// SQLに代入.
 			ps.setString(1, userId);
@@ -61,7 +60,7 @@ public class UsersDao {
 			if (rs.next()) {
 
 				// カラムを取得して各setterへ送る.
-				user.setNo(rs.getInt("no"));
+				user.setId(rs.getInt("id"));
 				user.setUserId(rs.getString("userid"));
 				user.setPassword(rs.getString("password"));
 
@@ -90,7 +89,7 @@ public class UsersDao {
 		try {
 
 			// SQL文送信.
-			ps = con.prepareStatement("SELECT userid FROM user");
+			ps = con.prepareStatement("SELECT userid FROM users");
 
 			// 検索結果取得.
 			rs = ps.executeQuery();
@@ -112,37 +111,8 @@ public class UsersDao {
 		return userIdAllList;
 	}
 
-	// ユーザー新規登録メソッド(userテーブル).
-	public int userNewRegisterForUserTable(List<Object> parametersList) {
-
-		// 戻り値用変数.
-		int rows = -1;
-
-		try {
-
-			// SQL文送信（INSERT）.
-			ps = con.prepareStatement("INSERT INTO user(userid,password) VALUES (?,?)");
-
-			// SQLに代入.
-			ps.setString(1, (String)parametersList.get(0));
-			ps.setString(2, (String)parametersList.get(1));
-
-			// SQL実行.
-			rows = ps.executeUpdate();
-
-		} catch (Exception e) {
-
-			System.out.print("登録処理で異常が発生しました。：");
-			e.printStackTrace();
-
-		}
-
-		return rows;
-
-	}
-
-	// ユーザー新規登録メソッド(users_informationテーブル).
-	public int userNewRegisterForUsersInformationTable(List<Object> parametersList) {
+	// ユーザー新規登録メソッド.
+	public int userNewRegister(Users users) {
 
 		// 戻り値用変数.
 		int rows = -1;
@@ -151,20 +121,20 @@ public class UsersDao {
 
 			// SQL文送信（INSERT）.
 			ps = con.prepareStatement(
-					"INSERT INTO users_information(userid,familyname,firstname,familyname_furigana,firstname_furigana,gender,birthday,address_prefectures,address_municipality,email_address,phone_number) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO users(userid,password,familyname,firstname,familyname_furigana,firstname_furigana,birthDay,address_prefectures,address_municipality,email_address,phone_number) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 
 			// SQLに代入.
-			ps.setString(1, (String)parametersList.get(0));
-			ps.setString(2, (String)parametersList.get(2));
-			ps.setString(3, (String)parametersList.get(3));
-			ps.setString(4, (String)parametersList.get(4));
-			ps.setString(5, (String)parametersList.get(5));
-			ps.setString(6, (String)parametersList.get(6));
-			ps.setDate(7, (Date)parametersList.get(7));
-			ps.setString(8, (String)parametersList.get(8));
-			ps.setString(9, (String)parametersList.get(9));
-			ps.setString(10, (String)parametersList.get(10));
-			ps.setString(11, (String)parametersList.get(11));
+			ps.setString(1, users.getUserId());
+			ps.setString(2, users.getPassword());
+			ps.setString(3, users.getFamilyName());
+			ps.setString(4, users.getFirstName());
+			ps.setString(5, users.getFamilyNameFurigana());
+			ps.setString(6, users.getFirstNameFurigana());
+			ps.setDate(7, users.getBirthDay());
+			ps.setString(8, users.getAddressPrefectures());
+			ps.setString(9, users.getAddressMunicipality());
+			ps.setString(10, users.getEmailAddress());
+			ps.setInt(11, users.getPhoneNumber());
 
 			// SQL実行.
 			rows = ps.executeUpdate();

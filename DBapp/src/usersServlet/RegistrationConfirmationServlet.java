@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.UsersDao;
 import entity.Users;
-import entity.UsersInformation;
 
 //@WebServlet("/RegistrationConfirmationServlet")
 //ユーザー登録情報の整合性確認用Servlet.
@@ -35,24 +34,30 @@ public class RegistrationConfirmationServlet extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String familyNameFurigana = request.getParameter("familyNameFurigana");
 		String firstNameFurigana = request.getParameter("firstNameFurigana");
-		String gender = request.getParameter("gender");
 		String birthday = request.getParameter("birthday");
 		String addressPrefectures = request.getParameter("addressPrefectures");
 		String addressMunicipality = request.getParameter("addressMunicipality");
 		String emailAddress = request.getParameter("emailAddress");
 		String phonenumber = request.getParameter("phonenumber");
+		//int phonenumber3 = Integer.parseInt(request.getParameter("phonenumber"));
+
+		//検証用.
+		//int phoneNumber1 = Integer.parseInt("10");
+		int phoneNumber2 = Integer.parseInt(phonenumber,10);
+		//NumberFormat commaFormat = NumberFormat.getNumberInstance(); //カンマ区切り
+		//String phoneNumber = commaFormat.format(phonenumber);
 
 		// 未入力検証用配列.
-		String[] parameters = { userId, password, familyName, firstName, familyNameFurigana, firstNameFurigana, gender,
+		String[] parameters = { userId, password, familyName, firstName, familyNameFurigana, firstNameFurigana,
 				birthday, addressPrefectures, addressMunicipality, emailAddress, phonenumber };
-
-		// パラメータ保管用リスト.
-		List<Object> parametersList = new ArrayList<Object>();
 
 		// 表示メッセージ用リスト.
 		List<String> attentionMessageList = new ArrayList<String>();
 
-		// 整合性確認用変数.（正しいブロックを通るたびに+1される：最大値8）
+		// エンティティクラス宣言.
+		Users users = null;
+
+		// 整合性確認用変数.（正しいブロックを通るたびに+1される：最大値7）
 		int integrityCheckFlag = 0;
 
 		// 未入力検証用変数.
@@ -81,38 +86,21 @@ public class RegistrationConfirmationServlet extends HttpServlet {
 
 		} else {
 
-			// エンティティへ格納：usersテーブル.
-			Users users = new Users();
+			// エンティティへ格納.
+			users = new Users();
 			users.setUserId(userId);
 			users.setPassword(password);
-
-			// エンティティへ格納：users_informationテーブル.
-			UsersInformation usersInfo = new UsersInformation();
-			usersInfo.setUserId(userId);
-			usersInfo.setFamilyName(familyName);
-			usersInfo.setFirstName(firstName);
-			usersInfo.setFamilyNameFurigana(familyNameFurigana);
-			usersInfo.setFirstNameFurigana(firstNameFurigana);
-			usersInfo.setGender(gender);
-			usersInfo.setBirthday(java.sql.Date.valueOf(birthday));
-			usersInfo.setAddressPrefectures(addressPrefectures);
-			usersInfo.setAddressMunicipality(addressMunicipality);
-			usersInfo.setEmailAddress(emailAddress);
-			usersInfo.setPhoneNumber(phonenumber);
-
-			// 各種パラメータをリストへ格納.
-			parametersList.add(users.getUserId());
-			parametersList.add(users.getPassword());
-			parametersList.add(usersInfo.getFamilyName());
-			parametersList.add(usersInfo.getFirstName());
-			parametersList.add(usersInfo.getFamilyNameFurigana());
-			parametersList.add(usersInfo.getFirstNameFurigana());
-			parametersList.add(usersInfo.getGender());
-			parametersList.add(usersInfo.getBirthday());
-			parametersList.add(usersInfo.getAddressPrefectures());
-			parametersList.add(usersInfo.getAddressMunicipality());
-			parametersList.add(usersInfo.getEmailAddress());
-			parametersList.add(usersInfo.getPhoneNumber());
+			users.setUserId(userId);
+			users.setFamilyName(familyName);
+			users.setFirstName(firstName);
+			users.setFamilyNameFurigana(familyNameFurigana);
+			users.setFirstNameFurigana(firstNameFurigana);
+			users.setBirthDay(java.sql.Date.valueOf(birthday));
+			users.setAddressPrefectures(addressPrefectures);
+			users.setAddressMunicipality(addressMunicipality);
+			users.setEmailAddress(emailAddress);
+			//users.setPhoneNumber(Integer.parseInt(phonenumber));
+			users.setPhoneNumber(phoneNumber2);
 
 			// 検証1：ユーザーID.
 
@@ -195,19 +183,7 @@ public class RegistrationConfirmationServlet extends HttpServlet {
 
 			}
 
-			// 検証4：性別.
-			if (gender.equals("男性") || gender.equals("女性") || gender.equals("その他")) {
-
-				integrityCheckFlag++;
-
-			} else {
-
-				// 注意メッセージ格納.
-				attentionMessageList.add("性別：無効な選択肢です。");
-
-			}
-
-			// 検証5：生年月日.
+			// 検証4：生年月日.
 			// 日付比較用変数.
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date upperLimitBirthday = null;
@@ -246,7 +222,7 @@ public class RegistrationConfirmationServlet extends HttpServlet {
 
 			}
 
-			// 検証6：住所.
+			// 検証5：住所.
 
 			// 都道府県配列.
 			String[] japanPrefectures = { "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県",
@@ -292,8 +268,8 @@ public class RegistrationConfirmationServlet extends HttpServlet {
 
 			}
 
-			// 検証7：メールアドレス.
-			if (emailAddress.contains("@")) {
+			// 検証6：メールアドレス.
+			if (emailAddress.contains("@gmail.com")) {
 
 				if (emailAddress.length() <= 50) {
 
@@ -309,12 +285,12 @@ public class RegistrationConfirmationServlet extends HttpServlet {
 			} else {
 
 				// 注意メッセージ格納.
-				attentionMessageList.add("メールアドレス：形式が異なっています。");
+				attentionMessageList.add("メールアドレス：gmailのアドレスを入れてください。");
 
 			}
 
-			// 検証8：電話番号.
-			if (phonenumber.contains("-")) {
+			// 検証7：電話番号.
+			if (phonenumber.contains("0120") || phonenumber.contains("090")) {
 
 				if (phonenumber.length() <= 15) {
 
@@ -330,18 +306,18 @@ public class RegistrationConfirmationServlet extends HttpServlet {
 			} else {
 
 				// 注意メッセージ格納.
-				attentionMessageList.add("電話番号：形式が異なっています。");
+				attentionMessageList.add("電話番号：090または0120から始まる番号を入れてください。");
 
 			}
 
 		}
 
 		// 検証結果総合判断.(チェックフラグの数で分岐).
-		if (integrityCheckFlag == 8) {
+		if (integrityCheckFlag == 7) {
 
-			// パラメータリストをセッションへ送る.
+			// エンティティをセッションへ送る.
 			HttpSession session = request.getSession(true);
-			session.setAttribute("parametersList", parametersList);
+			session.setAttribute("users", users);
 
 			// フォワード先変更(プレビュー画面へ).
 			path = "/Users/userNewRegistrationPreview.jsp";

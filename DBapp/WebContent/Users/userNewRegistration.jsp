@@ -79,11 +79,6 @@
 				</tr>
 
 				<tr>
-					<td align="right"><label for="gender">性別：</label></td>
-					<td><input type="radio" name="gender" id="gender" value="男性">男性<input type="radio" name="gender" value="女性">女性<input type="radio" name="gender" value="その他">その他</td>
-				</tr>
-
-				<tr>
 					<td align="right"><label for="birthday">生年月日：</label></td>
 					<td><input type="date" name="birthday" id="birthday"></td>
 				</tr>
@@ -105,7 +100,7 @@
 
 				<tr>
 					<td align="right"><label for="phonenumber">電話番号：</label></td>
-					<td><input type="tel" name="phonenumber" id="phonenumber" placeholder="0123-4567-8900"></td>
+					<td><input type="text" name="phonenumber" id="phonenumber" placeholder="012345678900"></td>
 				</tr>
 
 			</table>

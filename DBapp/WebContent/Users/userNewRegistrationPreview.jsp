@@ -1,14 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 
-<%@	page import="java.util.*,java.text.*" %>
+<%@	page import="java.util.*,java.text.*,entity.*" %>
 
 <%
 
-	//セッションから各種パラメータを受取.
-	List<Object> parametersList = (List<Object>)session.getAttribute("parametersList");
+	//セッションからエンティティを受取.
+	Users users = (Users)session.getAttribute("users");
 
 %>
-
 
 <!DOCTYPE html>
 
@@ -27,48 +26,43 @@
 			<table>
 
 				<tr>
-					<td align="right"><label for="userId">ユーザーID：</label></td>
-					<td><%=parametersList.get(0)%></td>
+					<td align="right">ユーザーID：</td>
+					<td><%=users.getUserId()%></td>
 				</tr>
 
 				<tr>
-					<td align="right"><label for="password">パスワード：</label></td>
-					<td><%=parametersList.get(1)%></td>
+					<td align="right">パスワード：</td>
+					<td><%=users.getPassword()%></td>
 				</tr>
 
 				<tr>
-					<td align="right"><label for="name">氏名：</label></td>
-					<td><%=parametersList.get(2)%> <%=parametersList.get(3)%></td>
+					<td align="right">氏名：</td>
+					<td><%=users.getFamilyName()%> <%=users.getFirstName()%></td>
 				</tr>
 
 				<tr>
-					<td align="right"><label for="furigana">フリガナ：</label></td>
-					<td><%=parametersList.get(4)%> <%=parametersList.get(5)%></td>
+					<td align="right">フリガナ：</td>
+					<td><%=users.getFamilyNameFurigana()%> <%=users.getFirstNameFurigana()%></td>
 				</tr>
 
 				<tr>
-					<td align="right"><label for="gender">性別：</label></td>
-					<td><%=parametersList.get(6)%></td>
+					<td align="right">生年月日：</td>
+					<td><%=users.getBirthDay()%></td>
 				</tr>
 
 				<tr>
-					<td align="right"><label for="birthday">生年月日：</label></td>
-					<td><%=parametersList.get(7)%></td>
+					<td align="right">住所：</td>
+					<td><%=users.getAddressPrefectures()%><%=users.getAddressMunicipality()%></td>
 				</tr>
 
 				<tr>
-					<td align="right"><label for="address">住所：</label></td>
-					<td><%=parametersList.get(8)%><%=parametersList.get(9)%></td>
+					<td align="right">メールアドレス：</td>
+					<td><%=users.getEmailAddress()%></td>
 				</tr>
 
 				<tr>
-					<td align="right"><label for="emailAddress">メールアドレス：</label></td>
-					<td><%=parametersList.get(10)%></td>
-				</tr>
-
-				<tr>
-					<td align="right"><label for="phonenumber">電話番号：</label></td>
-					<td><%=parametersList.get(11)%></td>
+					<td align="right">電話番号：</td>
+					<td><%=users.getPhoneNumber()%></td>
 				</tr>
 
 				<tr>

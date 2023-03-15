@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UsersDao;
+import entity.Users;
 
 //@WebServlet("/UserNewRegistrationServlet")
 public class UserNewRegistrationServlet extends HttpServlet {
@@ -28,16 +29,21 @@ public class UserNewRegistrationServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 
 		// セッションから各種パラメータを受取.
-		List<Object> parametersList = (List<Object>) session.getAttribute("parametersList");
+		Users users = (Users) session.getAttribute("users");
 
-
-
+		// Dao変数宣言.
 		UsersDao dao = null;
+
+		// 登録処理数結果（正常なら1）
+		int registrationResult = 0;
 
 		try {
 
 			// Daoインスタンス生成.
 			dao = new UsersDao();
+
+			// データベースへ登録.
+			registrationResult = dao.userNewRegister(users);
 
 		} catch (Exception e) {
 
@@ -45,19 +51,13 @@ public class UserNewRegistrationServlet extends HttpServlet {
 
 		}
 
-		// userテーブルへ登録(userid,password).
-		int registrationResult1 = dao.userNewRegisterForUserTable(parametersList);
-
-		// users_informationテーブルへ登録(password以外).
-		int registrationResult2 = dao.userNewRegisterForUsersInformationTable(parametersList);
-
-		if (registrationResult1 == 1 && registrationResult2 == 1) {
+		if (registrationResult == 1) {
 
 			// フォワード先変更（ログイン画面へ）
 			path = "/login_logout/login.jsp";
 
 			// 登録完了メッセージをリクエストへ格納,
-			String registResultMessage = "登録しました：" + parametersList.get(0);
+			String registResultMessage = "登録しました：" + users.getUserId();
 			request.setAttribute("registResultMessage", registResultMessage);
 
 		} else {
