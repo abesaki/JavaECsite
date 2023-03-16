@@ -86,9 +86,9 @@
 				<tr>
 					<td align="right"><label for="address">住所：</label></td>
 					<td><select name="addressPrefectures" id="address">
-<% 						for(int i = 0; i < japanPrefectures.length ; i++ ) {%>
-							<option value="<%=japanPrefectures[i]%>"><%=japanPrefectures[i]%></option>
-<% 						}%>
+<% 							for(int i = 0; i < japanPrefectures.length ; i++ ) {%>
+								<option value="<%=japanPrefectures[i]%>"><%=japanPrefectures[i]%></option>
+<% 							}%>
 						</select>
 						<input type="text" name="addressMunicipality" id="address" placeholder="市町村以降"></td>
 				</tr>
@@ -100,7 +100,7 @@
 
 				<tr>
 					<td align="right"><label for="phonenumber">電話番号：</label></td>
-					<td><input type="text" name="phonenumber" id="phonenumber" placeholder="012345678900"></td>
+					<td><input type="tel" name="phonenumber" id="phonenumber" placeholder="0123-4567-8900"></td>
 				</tr>
 
 			</table>

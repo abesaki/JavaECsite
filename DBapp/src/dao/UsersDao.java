@@ -24,14 +24,6 @@ public class UsersDao {
 	// コンストラクタでコネクションする.
 	public UsersDao() throws Exception {
 
-		// ProcessBuilderインスタンスを生成する.
-		ProcessBuilder apacheStart = new ProcessBuilder("C:\\xampp\\apache_start.bat");
-		ProcessBuilder mysqlStart = new ProcessBuilder("C:\\xampp\\mysql_start.bat");
-
-		// Mysql自動開始（手動で起動する場合はコメントオフすること）.
-		apacheStart.start();
-		mysqlStart.start();
-
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
 		con = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -134,7 +126,7 @@ public class UsersDao {
 			ps.setString(8, users.getAddressPrefectures());
 			ps.setString(9, users.getAddressMunicipality());
 			ps.setString(10, users.getEmailAddress());
-			ps.setInt(11, users.getPhoneNumber());
+			ps.setString(11, users.getPhoneNumber());
 
 			// SQL実行.
 			rows = ps.executeUpdate();

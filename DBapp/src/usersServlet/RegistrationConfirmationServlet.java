@@ -39,13 +39,6 @@ public class RegistrationConfirmationServlet extends HttpServlet {
 		String addressMunicipality = request.getParameter("addressMunicipality");
 		String emailAddress = request.getParameter("emailAddress");
 		String phonenumber = request.getParameter("phonenumber");
-		//int phonenumber3 = Integer.parseInt(request.getParameter("phonenumber"));
-
-		//検証用.
-		//int phoneNumber1 = Integer.parseInt("10");
-		int phoneNumber2 = Integer.parseInt(phonenumber,10);
-		//NumberFormat commaFormat = NumberFormat.getNumberInstance(); //カンマ区切り
-		//String phoneNumber = commaFormat.format(phonenumber);
 
 		// 未入力検証用配列.
 		String[] parameters = { userId, password, familyName, firstName, familyNameFurigana, firstNameFurigana,
@@ -99,8 +92,7 @@ public class RegistrationConfirmationServlet extends HttpServlet {
 			users.setAddressPrefectures(addressPrefectures);
 			users.setAddressMunicipality(addressMunicipality);
 			users.setEmailAddress(emailAddress);
-			//users.setPhoneNumber(Integer.parseInt(phonenumber));
-			users.setPhoneNumber(phoneNumber2);
+			users.setPhoneNumber(phonenumber);
 
 			// 検証1：ユーザーID.
 

@@ -6,20 +6,20 @@ import java.sql.Timestamp;
 public class Users {
 
 	//field.
-	private int id; // `id` int(10) NOT NULL AUTO_INCREMENT,
-	private String userId; // `userid` varchar(10) NOT NULL,
-	private String password; // `password` varchar(20) NOT NULL,
-	private String familyName; // `familyname` varchar(10) DEFAULT NULL,
-	private String firstName; // `firstname` varchar(10) DEFAULT NULL,
-	private String familyNameFurigana; // `familyname_furigana` varchar(10) DEFAULT NULL,
-	private String firstNameFurigana; // `firstname_furigana` varchar(10) DEFAULT NULL,
-	private Date birthDay; // `birthday` date DEFAULT NULL,
-	private String addressPrefectures; // `address_prefectures` varchar(5) DEFAULT NULL,
-	private String addressMunicipality; // `address_municipality` varchar(100) DEFAULT NULL,
-	private String emailAddress; // `email_address` varchar(50) DEFAULT NULL,
-	private int phoneNumber; // `phone_number` int(15) DEFAULT NULL,
-	private Timestamp registrationDate; // `registration_date` timestamp NOT NULL DEFAULT current_timestamp(),
-	private Timestamp updatedDate; // `updated_date` timestamp NOT NULL DEFAULT current_timestamp(),
+	private int id; // `id` int(10) NOT NULL AUTO_INCREMENT.
+	private String userId; // `userid` varchar(10) NOT NULL.
+	private String password; // `password` varchar(20) NOT NULL.
+	private String familyName; // `familyname` varchar(10) DEFAULT NULL.
+	private String firstName; // `firstname` varchar(10) DEFAULT NULL.
+	private String familyNameFurigana; // `familyname_furigana` varchar(10) DEFAULT NULL.
+	private String firstNameFurigana; // `firstname_furigana` varchar(10) DEFAULT NULL.
+	private Date birthDay; // `birthday` date DEFAULT NULL.
+	private String addressPrefectures; // `address_prefectures` varchar(5) DEFAULT NULL.
+	private String addressMunicipality; // `address_municipality` varchar(100) DEFAULT NULL.
+	private String emailAddress; // `email_address` varchar(50) DEFAULT NULL.
+	private String phoneNumber; // `phone_number` int(15) DEFAULT NULL.
+	private Timestamp registrationDate; // `registration_date`  NOT NULL DEFAULT current_timestamp().
+	private Timestamp updatedDate; // `updated_date` timestamp NOT NULL DEFAULT current_timestamp().
 
 	//setter,getter.
 	public void setId(int id) {this.id = id;}
@@ -55,8 +55,8 @@ public class Users {
 	public void setEmailAddress(String emailAddress) {this.emailAddress = emailAddress;}
 	public String getEmailAddress() {return this.emailAddress;}
 
-	public void setPhoneNumber(int phoneNumber) {this.phoneNumber = phoneNumber;}
-	public int getPhoneNumber() {return this.phoneNumber;}
+	public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
+	public String getPhoneNumber() {return this.phoneNumber;}
 
 	public void setRegistrationDate(Timestamp registrationDate) {this.registrationDate = registrationDate;}
 	public Timestamp getRegistrationDate() {return this.registrationDate;}

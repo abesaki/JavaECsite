@@ -35,8 +35,8 @@
 					<td align="right"><%=i+1%></td>
 					<td align="center"><%=productList.get(i).getName()%></td>
 					<td align="right"><%=commaFormat.format(productList.get(i).getPrice())%>円</td>
-					<td align="right"><%=commaFormat.format(productList.get(i).getCount())%></td>
-					<td align="right"><%=sdf.format(productList.get(i).getTimeStamp())%></td>
+					<td align="right"><%=commaFormat.format(productList.get(i).getStock())%></td>
+					<td align="right"><%=sdf.format(productList.get(i).getStockUpdateTime())%></td>
 				</tr>
 
 <%			} %>

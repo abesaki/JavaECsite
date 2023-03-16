@@ -75,7 +75,8 @@ public class ProductDao {
 		int rows = -1;
 
 		// SQL文送信（INSERT）.
-		ps = con.prepareStatement("UPDATE product SET count = ? , timestamp = current_timestamp() WHERE name = ?");
+		ps = con.prepareStatement(
+				"UPDATE product SET stock = ? , stock_update_time = current_timestamp() WHERE name = ?");
 
 		// SQLに代入.
 		ps.setInt(1, count);
@@ -92,22 +93,22 @@ public class ProductDao {
 	public int stockSearch(String name) throws Exception {
 
 		// 在庫数検索.
-		ps = con.prepareStatement("SELECT count FROM product WHERE name = ?");
+		ps = con.prepareStatement("SELECT stock FROM product WHERE name = ?");
 		ps.setString(1, name);
 
 		// SELECT結果取得.
 		rs = ps.executeQuery();
 
 		// 結果格納.
-		int count = 0;
+		int stock = 0;
 
 		while (rs.next()) {
 
-			count = rs.getInt("count");
+			stock = rs.getInt("stock");
 
 		}
 
-		return count;
+		return stock;
 	}
 
 	// 商品一覧取得メソッド.
@@ -127,11 +128,11 @@ public class ProductDao {
 			Product product = new Product();
 
 			// カラムを取得して各setterへ送る.
-			product.setNo(rs.getInt("no"));
+			product.setId(rs.getInt("id"));
 			product.setName(rs.getString("name"));
 			product.setPrice(rs.getInt("price"));
-			product.setCount(rs.getInt("count"));
-			product.setTimeStampProduct(rs.getTimestamp("TimeStamp"));
+			product.setStock(rs.getInt("stock"));
+			product.setStockUpdateTime(rs.getTimestamp("stock_update_time"));
 
 			// リストに格納.
 			productList.add(product);
@@ -149,7 +150,7 @@ public class ProductDao {
 		List<Product> productSettingList = new ArrayList<Product>();
 
 		// 在庫数検索.
-		ps = con.prepareStatement("\r\n" +
+		ps = con.prepareStatement(
 				"SELECT *, product.timestamp AS 'timeStampProduct', product_setting.timestamp AS 'timeStampProductSetting'  FROM product_setting JOIN product ON name = productName;");
 
 		// 検索結果取得.
