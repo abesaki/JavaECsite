@@ -56,7 +56,7 @@
 		<ul>
 			<li><a href="/DBapp/Product/menu_productManagement.jsp">商品管理</a></li>
 			<li><a href="/DBapp/News/menu_newsManagement.jsp">ニュース管理</a></li>
-			<li>ユーザー管理</li>
+			<li><a href="/DBapp/Users/menu_usersManagement.jsp">ユーザー管理</a></li>
 		</ul>
 
 		<a href="/DBapp/LogoutServlet">ログアウトする</a>

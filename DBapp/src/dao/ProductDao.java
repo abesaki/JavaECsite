@@ -161,16 +161,14 @@ public class ProductDao {
 			// インスタンス生成.
 			Product product = new Product();
 
-			product.setNo(rs.getInt("no"));
+			product.setId(rs.getInt("id"));
 			product.setName(rs.getString("name"));
 			product.setPrice(rs.getInt("price"));
-			product.setCount(rs.getInt("count"));
-			product.setTimeStampProduct(rs.getTimestamp("timeStampProduct"));
-			product.setId(rs.getInt("id"));
-			product.setProductName(rs.getString("productName"));
+			product.setStock(rs.getInt("stock"));
+			product.setStockUpdateTime(rs.getTimestamp("stockUpdateTime"));
 			product.setAutoAddStockCount(rs.getInt("autoAddStockCount"));
-			product.setCountLowerLimit(rs.getInt("countLowerLimit"));
-			product.setTimeStampProductSetting(rs.getTimestamp("timeStampProductSetting"));
+			product.setStockLowerLimit(rs.getInt("setStockLowerLimit"));
+			product.setSettingChangeTime(rs.getTimestamp("setSettingChangeTime"));
 
 			productSettingList.add(product);
 

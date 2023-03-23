@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +15,9 @@ import javax.servlet.http.HttpSession;
 import dao.ProductDao;
 import dao.ShoppingDao;
 import entity.Orders;
+import entity.Product;
 
-//@WebServlet("/ProductBuyServlet")
+@WebServlet("/ProductBuyServlet")
 public class ProductBuyServlet extends HttpServlet {
 
 	// フォワード用変数.
@@ -62,11 +64,11 @@ public class ProductBuyServlet extends HttpServlet {
 					if ((productStock - ordersList.get(i).getBuyCount()) <= 10) {
 
 						// 自動追加個数設定確認.
-						int autoAddStockCount = productDao.autoAddStockCountGet(ordersList.get(i).getProductName());
+						List<Product> autoAddStockCount = productDao.productSettingGet();
 
-						// 商品発注(在庫数変更)メソッド呼び出し.
-						productDao.stockCountChange(ordersList.get(i).getProductName(),
-								(productStock + autoAddStockCount));
+						// 商品発注(在庫数変更)メソッド呼び出し.後で改修.
+						//productDao.stockCountChange(ordersList.get(i).getProductName(),
+								//(productStock + autoAddStockCount));
 
 					}
 

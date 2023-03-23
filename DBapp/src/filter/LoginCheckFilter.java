@@ -9,11 +9,12 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-//@WebFilter("/LoginCheckFilter")
+@WebFilter(urlPatterns= {"/Menu/*","/News/*","/Product/*","/Shopping/*","/Users/*"})
 public class LoginCheckFilter extends HttpFilter implements Filter {
 
 	@Override
@@ -29,10 +30,10 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 		HttpSession session = request2.getSession(true);
 
 		//検証：セッション登録（ID）.
-		if(session.getAttribute("id") == null) {
+		if(session.getAttribute("userId") == null) {
 
 			//フォワード（新規登録画面へ）.
-			RequestDispatcher rd = request2.getRequestDispatcher("/JSP/secret.jsp");
+			RequestDispatcher rd = request2.getRequestDispatcher("/Error/secret.jsp");
 			rd.forward(request, response);
 
 		} else {

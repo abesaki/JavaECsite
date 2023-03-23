@@ -40,7 +40,7 @@
 					<td><%=i+1%></td>
 					<td align="center"><input type="hidden" name="name" value="<%=productList.get(i).getName()%>"><%=productList.get(i).getName()%></td>
 					<td><input type="hidden" name="price" value="<%=productList.get(i).getPrice()%>"><%=commaFormat.format(productList.get(i).getPrice())%>円</td>
-					<td><%=commaFormat.format(productList.get(i).getCount())%></td>
+					<td><%=commaFormat.format(productList.get(i).getStock())%></td>
 					<td align="right"><input type="number" name="buyCount" size="5" min="0" max="10000" value="0"></td>
 				</tr>
 

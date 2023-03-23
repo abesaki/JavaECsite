@@ -38,10 +38,10 @@
 				<tr>
 					<td align="right"><%=i+1%></td>
 					<td align="center"><%=productSettingList.get(i).getName()%></td>
-					<td align="right"><%=commaFormat.format(productSettingList.get(i).getCount())%>個</td>
-					<td align="right"><%=commaFormat.format(productSettingList.get(i).getCountLowerLimit())%>個</td>
+					<td align="right"><%=commaFormat.format(productSettingList.get(i).getStock())%>個</td>
+					<td align="right"><%=commaFormat.format(productSettingList.get(i).getStockLowerLimit())%>個</td>
 					<td align="right"><%=commaFormat.format(productSettingList.get(i).getAutoAddStockCount())%>個</td>
-					<td align="right"><%=sdf.format(productSettingList.get(i).getTimeStampProductSetting())%></td>
+					<td align="right"><%=sdf.format(productSettingList.get(i).getSettingChangeTime())%></td>
 				</tr>
 
 <% 		} %>

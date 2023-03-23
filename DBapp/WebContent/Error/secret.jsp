@@ -3,15 +3,12 @@
 <html>
 
 	<head>
-		<title>会員用ページ</title>
+		<title>会員専用ページ</title>
 	</head>
 
 	<body>
-		ログインしてください。<br>
-		<br>
-		新規の方は<a href="/DBapp/JSP/newRegist.jsp">こちら</a>。<br>
-		登録済みの方は<a href="/DBapp/JSP/login.jsp">こちら</a>。
-
-
+		このページを閲覧するにはログインしてください。<br>
+		<a href="/DBapp/login_logout/login.jsp">ログインページへ</a>
 	</body>
+
 </html>

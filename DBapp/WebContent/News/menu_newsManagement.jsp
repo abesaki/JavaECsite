@@ -24,8 +24,9 @@
 				<li><a href="/DBapp/News/newsCreation.jsp">記事作成</a></li>
 				<li><a href="/DBapp/News/newsView.jsp">記事閲覧</a></li>
 				<li><a href="/DBapp/News/newsDeletion.jsp">記事削除</a></li>
-				<li><a href="/DBapp/Menu/menu_rootUser.jsp">メニューに戻る</a></li>
 			</ul>
+
+			<a href="/DBapp/Menu/menu_rootUser.jsp">メニューに戻る</a>
 
 	</body>
 

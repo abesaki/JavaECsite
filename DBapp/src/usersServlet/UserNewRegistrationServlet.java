@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import dao.UsersDao;
 import entity.Users;
 
-//@WebServlet("/UserNewRegistrationServlet")
+@WebServlet("/UserNewRegistrationServlet")
 public class UserNewRegistrationServlet extends HttpServlet {
 
 	// フォワード用変数.
@@ -43,7 +44,7 @@ public class UserNewRegistrationServlet extends HttpServlet {
 			dao = new UsersDao();
 
 			// データベースへ登録.
-			registrationResult = dao.userNewRegister(users);
+			registrationResult = dao.usersNewRegister(users);
 
 		} catch (Exception e) {
 

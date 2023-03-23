@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +18,8 @@ import javax.servlet.http.HttpSession;
 import dao.UsersDao;
 import entity.Users;
 
-//@WebServlet("/RegistrationConfirmationServlet")
 //ユーザー登録情報の整合性確認用Servlet.
+@WebServlet("/RegistrationConfirmationServlet")
 public class RegistrationConfirmationServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -113,7 +114,7 @@ public class RegistrationConfirmationServlet extends HttpServlet {
 			}
 
 			// DaoメソッドでユーザーIDを全部取得.
-			List<String> userIdAllList = dao.userIdAllGet();
+			List<String> userIdAllList = dao.usersIdAllGet();
 
 			for (int i = 0; i < userIdAllList.size(); i++) {
 

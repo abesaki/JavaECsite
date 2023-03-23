@@ -22,18 +22,18 @@
 		<form action="/DBapp/StockCountAddServlet" method="post">
 
 			<table>
-				<tr align="right">
-					<td><label for="name">商品名：</label></td>
+				<tr>
+					<td align="right"><label for="name">商品名：</label></td>
 					<td><select name="name" id="name">
-<% 						for(int i = 0; i < productList.size() ; i++ ) {%>
-							<option value="<%=productList.get(i).getName()%>"><%=productList.get(i).getName()%></option>
-<% 						}%>
+<% 							for(int i = 0; i < productList.size() ; i++ ) {%>
+								<option value="<%=productList.get(i).getName()%>"><%=productList.get(i).getName()%></option>
+<% 							}%>
 						</select>
 					</td>
 				</tr>
 
 				<tr>
-					<td><label for="count">個数：</label></td>
+					<td  align="right"><label for="count">個数：</label></td>
 					<td><input type="number" name="count" id="count" min="0" max="10000" required></td>
 				</tr>
 

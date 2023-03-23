@@ -8,8 +8,9 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 
-//@WebFilter("/EncodingFilter")
+@WebFilter(urlPatterns= {"/*"})
 public class EncodingFilter implements Filter {
 
 	//initメソッド：開始時に1度だけ呼び出される.
